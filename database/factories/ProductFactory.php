@@ -14,7 +14,12 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $faker->word,
+            'description' => $faker->paragraph,
+            'price' => $faker->numberBetween(1000, 4000),
+            'category' => $faker->randomElement(['mens', 'womens', 'sporty']),
+            'quantity' => $faker->randomDigit,
+
         ];
     }
 }
