@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 
+
 class ProductController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::all();
     }
 
     /**
@@ -47,7 +48,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return $product;
     }
 
     /**
@@ -68,9 +69,15 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request,Product $product)
     {
-        //
+
+       $quantity = $request->input("quantity");
+       if ($product->quantity < $quantity) {
+         return ["message"=>"product not available"];
+       }
+       return $product->update(["quantity"=> $product->quantity - $quantity]);
+
     }
 
     /**

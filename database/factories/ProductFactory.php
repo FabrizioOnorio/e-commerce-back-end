@@ -14,12 +14,12 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $faker->word,
-            'description' => $faker->paragraph,
-            'price' => $faker->numberBetween(1000, 4000),
-            'category' => $faker->randomElement(['mens', 'womens', 'sporty']),
-            'quantity' => $faker->randomDigit,
-
+            'name' => $this->faker->word,
+            'description' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
+            'price' => $this->faker->biasedNumberBetween($min = 1000, $max = 2000, $function = 'sqrt'),
+            'category' => $this->faker->biasedNumberBetween($min = 1, $max = 3, $function = 'sqrt'),
+            'quantity' => $this->faker->biasedNumberBetween($min = 10, $max = 50, $function = 'sqrt'),
+            'image' => $this->faker->imageUrl($width = 640, $height = 480)
         ];
     }
 }
