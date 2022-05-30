@@ -74,7 +74,10 @@ class ProductController extends Controller
 
        $quantity = $request->input("quantity");
        if ($product->quantity < $quantity) {
-         return ["message"=>"product not available"];
+         return ["message"=>"product not available",
+                 "id"=>$product->id
+
+                ];
        }
        return $product->update(["quantity"=> $product->quantity - $quantity]);
 
